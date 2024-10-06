@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERMUX HACKING TOOLS</title>
+  
+    <style>
+        /* Background slideshow with smoother transitions and blur effect */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            animation: backgroundSlide 30s infinite ease-in-out;
+            /* Add blur effect */
+        }
+
+        @keyframes backgroundSlide {
+            10% {background-image: url('https://as1.ftcdn.net/v2/jpg/05/83/90/46/1000_F_583904641_PbAToCBwm34o8UH3Axin2JOBC4tW0ezB.jpg');}
+            20% {background-image: url('https://thumbs.dreamstime.com/b/happy-indian-young-woman-using-laptop-computer-work-study-home-office-adult-wearing-glasses-pc-working-studying-sitting-table-192390495.jpg');}
+            45% {background-image: url('https://plus.unsplash.com/premium_photo-1661551770400-a64978e8b553?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29tcHV0ZXIlMjBnaXJsfGVufDB8fDB8fHww');}
+            55% {background-image: url('https://www.shutterstock.com/shutterstock/photos/1837034656/display_1500/stock-photo-photo-of-pretty-young-girl-sit-desktop-pc-hold-pen-write-notepad-wear-glasses-shirt-in-home-office-1837034656.jpg');}
+            65% {background-image: url('https://img.freepik.com/free-photo/businesswoman-cafe_1157-5422.jpg');}
+            85% {background-image: url('https://img.freepik.com/free-photo/medium-shot-woman-reading-digital-magazine_23-2150162708.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1727222400&semt=ais_hybrid');}
+            100% {background-image: url('https://img.freepik.com/premium-photo/happy-young-business-colleagues-using-laptop-computer_94574-2063.jpg');}
+        }
+
+        /* Centering container and form content using Flexbox */
+        body, html {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7); /* Darken the form background */
+            padding: 100px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px; /* Ensure the form doesn't stretch too much */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Add shadow for better visibility */
+            z-index: 1; /* Ensure it appears on top of blurred background */
+            filter: blur(px);
+        }
+
+        /* Glowing buttons with color change */
+        button {
+            background-color: #FF5733;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.5s, box-shadow 0.5s;
+        }
+
+        button:hover {
+            background-color: #32bd16;
+            box-shadow: 0 0 10px #0b17bd;
+        }
+
+        /* Headings with color animation */
+        h3 {
+            font-size: 22px;
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: colorChange 5s infinite;
+        }
+
+        @keyframes colorChange {
+            0% {color: #ce0b0b;}
+            33% {color: #dadd38;}
+            66% {color: #3357FF;}
+            100% {color: #a50a77;}
+        }
+
+        .unavailable {
+            color: red;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Hacking Tools Section: 1 Selection with 15 Tools -->
+        <h3>Hacking Tools</h3>
+        <select id="tools-box">
+            <option value="" disabled selected>Select a Tool</option>
+            <option value="image show">image show</option>
+            <option value="ip track">ip track</option>
+            <option value="cam hack">cam hack</option>
+            <option value="Metasploit">Metasploit</option>
+            <option value="none">none</option>
+            <option value="John the Ripper">John the Ripper</option>
+            <option value="SQLMap">SQLMap</option>
+            <option value="none">none</option>
+        </select>
+
+        <!-- Fourth Section: Play Video Button -->
+        <h3>Related Video</h3>
+        <button id="play-video-btn">Play Video</button>
+        <div id="video-status"></div>
+
+        <!-- Fifth Section: Get Source Code Button -->
+        <h3>Source Code</h3>
+        <button id="source-code-btn">Get command</button>
+    </div>
+
+    <script>
+        const data = {
+            "image show": {
+                "video": "",
+                "sourceCode": ""
+            },
+            "ip track": {
+                "video": "",
+                "sourceCode": ""
+            },
+            "cam hack": {
+                "video": "",
+                "sourceCode": ""
+            },
+            "Metasploit": {
+                "video": "",
+                "sourceCode": ""
+            },
+            "John the Ripper": {
+                "video": "",
+                "sourceCode": "https://github.com/Bhartiya-Hacker/John-IN-Termux"
+            },
+            "SQLMap": {
+                "video": "https://example.com/sqlmap-video",
+                "sourceCode": "https://example.com/sqlmap-code"
+            }
+        };
+
+        function updateLinks() {
+            const toolsBox = document.getElementById('tools-box');
+            const selectedTool = toolsBox.value;
+            const videoStatus = document.getElementById('video-status');
+
+            // Clear video status message
+            videoStatus.innerHTML = '';
+
+            // Get Play Video and Get command Code buttons
+            const playVideoBtn = document.getElementById('play-video-btn');
+            const sourceCodeBtn = document.getElementById('source-code-btn');
+
+            // If selected tool exists in the data, assign the video and source code links
+            if (data[selectedTool]) {
+                const videoLink = data[selectedTool].video;
+                const sourceCodeLink = data[selectedTool].sourceCode;
+
+                // Play Video button click event
+                playVideoBtn.onclick = function() {
+                    if (videoLink) {
+                        window.open(videoLink, '_blank');
+                    } else {
+                        videoStatus.innerHTML = '<p class="unavailable">Video not available</p>';
+                    }
+                };
+
+                // Get Source Code button click event
+                sourceCodeBtn.onclick = function() {
+                    if (sourceCodeLink) {
+                        window.open(sourceCodeLink, '_blank');
+                    } else {
+                        videoStatus.innerHTML = '<p class="unavailable">Source code not available</p>';
+                    }
+                };
+            }
+        }
+
+        // Trigger update when tool is selected
+        document.querySelectorAll('select').forEach(selectBox => {
+            selectBox.addEventListener('change', updateLinks);
+        });
+    </script>
+
+</body>
+</html>
