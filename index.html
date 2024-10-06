@@ -6,6 +6,30 @@
     <title>TERMUX HACKING TOOLS</title>
   
     <style>
+        /* Preloader style */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #preloader-logo {
+            width: 150px; /* Adjust size as needed */
+            animation: logoColorChange 1s infinite alternate;
+        }
+
+        @keyframes logoColorChange {
+            0% { filter: hue-rotate(0deg); } /* Red */
+            100% { filter: hue-rotate(240deg); } /* Blue */
+        }
+
         /* Background slideshow with smoother transitions and blur effect */
         body {
             font-family: Arial, sans-serif;
@@ -14,7 +38,6 @@
             background-size: cover;
             background-position: center;
             animation: backgroundSlide 30s infinite ease-in-out;
-            /* Add blur effect */
         }
 
         @keyframes backgroundSlide {
@@ -37,14 +60,14 @@
 
         .container {
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.7); /* Darken the form background */
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 100px;
             border-radius: 10px;
             width: 100%;
-            max-width: 500px; /* Ensure the form doesn't stretch too much */
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Add shadow for better visibility */
-            z-index: 1; /* Ensure it appears on top of blurred background */
-            filter: blur(px);
+            max-width: 500px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            z-index: 1;
+            display: none; /* Hide container initially */
         }
 
         /* Glowing buttons with color change */
@@ -89,6 +112,11 @@
 </head>
 <body>
 
+    <!-- Preloader -->
+    <div id="preloader">
+        <img id="preloader-logo" src="https://i.ibb.co/0V7mqWn/large.png" alt="Logo" /> <!-- Replace with your logo URL -->
+    </div>
+
     <div class="container">
         <!-- Hacking Tools Section: 1 Selection with 15 Tools -->
         <h3>Hacking Tools</h3>
@@ -115,6 +143,19 @@
     </div>
 
     <script>
+        // Preloader timer and welcome speech
+        window.onload = function () {
+            setTimeout(function () {
+                // Hide the preloader after 5 seconds
+                document.getElementById('preloader').style.display = 'none';
+                document.querySelector('.container').style.display = 'block';
+
+                // Use text-to-speech to announce the welcome message
+                const speech = new SpeechSynthesisUtterance("Welcome to our Termux hacking tools.");
+                speechSynthesis.speak(speech);
+            }, 5000);
+        };
+
         const data = {
             "image show": {
                 "video": "",
